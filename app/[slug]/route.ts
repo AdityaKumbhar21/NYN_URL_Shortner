@@ -12,7 +12,7 @@ export async function GET(req: Request, { params }: { params: { slug: string } }
     
 
     if(!link){
-        return NextResponse.redirect("/error-page")
+        return NextResponse.redirect(`${process.env.NEXT_API_BASE_URL}/error-page`)
     }
 
     link.clicks += 1
@@ -23,6 +23,6 @@ export async function GET(req: Request, { params }: { params: { slug: string } }
         userAgent: req.headers.get("user-agent") || "Unknown",
     })
     
-    return NextResponse.redirect(link)
+    return NextResponse.redirect(link.url)
 
 }

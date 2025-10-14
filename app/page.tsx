@@ -29,6 +29,8 @@ const page = () => {
       setShortUrl(res.data.shortUrl)
       toast.success(res.data.message)
     } catch (error: any) {
+      console.log("Error: ", error);
+      
       toast.error(error?.response?.data?.message || "Something went wrong")
     }finally{
       setLoading(false)
