@@ -14,6 +14,11 @@ const clickSchema = new mongoose.Schema({
     userAgent: {
         type: String,
         required: true
+    },
+     createdAt: {
+        type: Date,
+        default: Date.now,
+        expires :"10d"
     }
 });
 

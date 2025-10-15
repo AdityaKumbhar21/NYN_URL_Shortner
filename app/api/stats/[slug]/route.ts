@@ -29,11 +29,20 @@ export async function GET(req:Request, {params}: {params: {slug: string}}) {
             }
         ])
 
+        const userAgentStats = await Click.aggregate([
+        { $match: { urlId: link._id } },
+        { $group: { _id: "$userAgent", count: { $sum: 1 } } },
+        { $sort: { count: -1 } }
+        ]);
+
         return Response.json({
                 success: true,
                 message: "stats fetched successfully",
-                totalClicks: link.totalClicks,
-                daily: stats
+                slug: link.slug,
+                url: link.url,
+                totalClicks: link.clicks || 0,
+                daily: stats,
+                userAgents: userAgentStats
             }, {status: 200})
 
     } catch (error) {
