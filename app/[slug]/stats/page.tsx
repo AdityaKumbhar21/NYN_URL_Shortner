@@ -1,6 +1,7 @@
 "use client"
 import { Button } from '@/components/ui/button';
 import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card';
+import { useParams } from 'next/navigation';
 import React, { useEffect, useState } from 'react'
 import { toast } from 'sonner';
 
@@ -16,30 +17,38 @@ interface StatsData{
     totalClicks: number;
     daily: DailyStats[];
 }
-const page = ({ params }: { params: { slug: string } }) => {
+const page = () => {
     const [data, setData] = useState<StatsData | null>(null);
     const [loading, setLoading] = useState<boolean>(true);
+    const { slug } = useParams();
 
     useEffect(() => {
-        const fetchData = async () => {
-            try {
-                const response = await fetch(`/api/stats/${params.slug}`);
-                const result = await response.json();
-                
-                if(result.success){
-                    setData(result.data);
-                } else {
-                    toast.error('Failed to fetch data');
-                }
-            } catch (error) {
-                console.error('Error fetching data:', error);
-            } finally {
-                setLoading(false);
-            }
-        };
+    if (!slug) return;
 
-        fetchData();
-    }, [params.slug]);
+    const timer = setTimeout(async () => {
+      try {
+        const response = await fetch(`/api/stats/${slug}`);
+        const result = await response.json();
+
+        if (result.success) {
+          setData({
+            slug: result.slug,
+            url: result.url,
+            totalClicks: result.totalClicks,
+            daily: result.daily
+          });
+        } else {
+          toast.error('Failed to fetch data');
+        }
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      } finally {
+        setLoading(false);
+      }
+    }, 500);
+
+    return () => clearTimeout(timer); 
+  }, [slug]); 
 
     const handleCopy = () => {
     if (!data) return;
@@ -58,7 +67,7 @@ const page = ({ params }: { params: { slug: string } }) => {
     <div className="flex justify-center items-start min-h-screen p-4">
       <Card className="w-full max-w-md shadow-md mt-6">
         <CardHeader>
-          <CardTitle className="text-center">Analytics for /{data.slug}</CardTitle>
+          <CardTitle className="text-center">Analytics for /{data.url}</CardTitle>
         </CardHeader>
         <CardContent>
           <div className="mb-4">
