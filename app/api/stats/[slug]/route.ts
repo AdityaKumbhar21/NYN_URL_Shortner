@@ -2,7 +2,7 @@ import { dbConnect } from "@/lib/connectDB";
 import Click from "@/models/Click";
 import URL from "@/models/URL";
 
-export async function GET(req:Request, {params}: {params: {slug: string}}) {
+export async function GET(req:Request, {params}: {params: Promise<{slug: string}>}) {
     await dbConnect()
 
     try {
