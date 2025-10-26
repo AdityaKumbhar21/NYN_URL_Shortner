@@ -1,0 +1,38 @@
+<svg width="1200" height="630" viewBox="0 0 1200 630" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background gradient -->
+  <rect width="1200" height="630" fill="#0353a4"/>
+  <rect width="1200" height="630" fill="url(#gradient)"/>
+  
+  <defs>
+    <linearGradient id="gradient" x1="0" y1="0" x2="1200" y2="630" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#0353a4"/>
+      <stop offset="100%" stop-color="#0466c8"/>
+    </linearGradient>
+  </defs>
+  
+  <!-- Logo/Icon -->
+  <circle cx="200" cy="315" r="80" fill="white" opacity="0.2"/>
+  <g transform="translate(160, 275)">
+    <path d="M30 20H20C15.5817 20 12 23.5817 12 28V38C12 42.4183 15.5817 46 20 46H30" 
+          stroke="white" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M60 70H70C74.4183 70 78 66.4183 78 62V52C78 47.5817 74.4183 44 70 44H60" 
+          stroke="white" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+    <line x1="32" y1="45" x2="58" y2="45" stroke="white" stroke-width="6" stroke-linecap="round"/>
+  </g>
+  
+  <!-- Text -->
+  <text x="320" y="290" font-family="system-ui, -apple-system, sans-serif" font-size="72" font-weight="bold" fill="white">
+    NYNURL
+  </text>
+  <text x="320" y="350" font-family="system-ui, -apple-system, sans-serif" font-size="36" fill="white" opacity="0.9">
+    Not Your Normal URL Shortener
+  </text>
+  <text x="320" y="400" font-family="system-ui, -apple-system, sans-serif" font-size="28" fill="white" opacity="0.8">
+    Free Analytics • Lightning Fast • Custom Slugs
+  </text>
+  
+  <!-- Decorative elements -->
+  <circle cx="1050" cy="150" r="40" fill="white" opacity="0.1"/>
+  <circle cx="1100" cy="500" r="60" fill="white" opacity="0.08"/>
+  <circle cx="950" cy="550" r="30" fill="white" opacity="0.12"/>
+</svg>

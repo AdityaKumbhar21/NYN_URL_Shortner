@@ -18,6 +18,10 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "NYNURL - Not Your Normal URL Shortener | Free Analytics Included",
   description: "The only URL shortener that provides detailed analytics for free. Shorten links, track clicks, and understand your audience better.",
+  icons: {
+    icon: '/icon.svg',
+    apple: '/apple-icon.svg',
+  },
 };
 
 export default function RootLayout({

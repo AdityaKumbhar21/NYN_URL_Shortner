@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 180 180">
+  <!-- Background with rounded corners -->
+  <rect width="180" height="180" rx="40" fill="#0353a4"/>
+  
+  <!-- Large "NY" letters -->
+  <text x="90" y="115" font-family="Arial, sans-serif" font-size="80" font-weight="bold" fill="white" text-anchor="middle">NY</text>
+  
+  <!-- Link chain decoration -->
+  <circle cx="40" cy="40" r="10" fill="#FFD700"/>
+  <circle cx="140" cy="40" r="10" fill="#FFD700"/>
+  <line x1="50" y1="40" x2="130" y2="40" stroke="#FFD700" stroke-width="6"/>
+</svg>

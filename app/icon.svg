@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
+  <!-- Blue background -->
+  <rect width="32" height="32" fill="#0353a4" rx="6"/>
+  
+  <!-- White "NY" letters -->
+  <text x="16" y="23" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="white" text-anchor="middle">NY</text>
+  
+  <!-- Small link icon accent -->
+  <circle cx="7" cy="7" r="2" fill="#FFD700"/>
+  <circle cx="25" cy="7" r="2" fill="#FFD700"/>
+  <line x1="9" y1="7" x2="23" y2="7" stroke="#FFD700" stroke-width="1.5"/>
+</svg>
