@@ -6,7 +6,7 @@ import { Label } from '@radix-ui/react-label'
 import axios from 'axios'
 import React, { useState } from 'react'
 import { toast } from 'sonner'
-import { BarChart3, Zap, Shield, TrendingUp, Link2, ArrowRight, Check } from 'lucide-react'
+import { BarChart3, Zap, Shield, TrendingUp, Link2, ArrowRight, Check, AlertCircle, ExternalLink } from 'lucide-react'
 import Link from 'next/link'
 
 const Page = () => {
@@ -39,7 +39,16 @@ const Page = () => {
 
   const handleCopy = () =>{
     navigator.clipboard.writeText(shortUrl)
-    toast.success("Copied to clipboard!")
+    toast.success("Short URL copied to clipboard!")
+  }
+
+  const handleCopyAnalyticsLink = () => {
+    if (shortUrl) {
+      const slug = shortUrl.split('/').pop()
+      const analyticsUrl = `${window.location.origin}/${slug}/stats`
+      navigator.clipboard.writeText(analyticsUrl)
+      toast.success("Analytics link copied to clipboard!")
+    }
   }
 
   const handleViewStats = () => {
@@ -106,24 +115,48 @@ const Page = () => {
               </form>
 
               {shortUrl && (
-                <Card className="mt-6 bg-primary/5 border-primary/20">
-                  <CardContent className="pt-6">
-                    <div className="flex items-center justify-between mb-3">
-                      <span className="text-sm font-medium text-muted-foreground">Your shortened URL:</span>
-                      <Check className="w-5 h-5 text-primary" />
+                <>
+                  <Card className="mt-6 bg-primary/5 border-primary/20">
+                    <CardContent className="pt-6">
+                      <div className="flex items-center justify-between mb-3">
+                        <span className="text-sm font-medium text-muted-foreground">Your shortened URL:</span>
+                        <Check className="w-5 h-5 text-primary" />
+                      </div>
+                      <div className="flex items-center justify-between gap-3 mb-3">
+                        <span className="text-lg font-semibold text-primary truncate">{shortUrl}</span>
+                        <Button variant="outline" size="sm" onClick={handleCopy}>
+                          Copy
+                        </Button>
+                      </div>
+                      <div className="grid grid-cols-2 gap-2">
+                        <Button variant="secondary" size="sm" className="w-full" onClick={handleViewStats}>
+                          <BarChart3 className="w-4 h-4 mr-2" />
+                          View Analytics
+                        </Button>
+                        <Button variant="outline" size="sm" className="w-full" onClick={handleCopyAnalyticsLink}>
+                          <ExternalLink className="w-4 h-4 mr-2" />
+                          Copy Analytics Link
+                        </Button>
+                      </div>
+                    </CardContent>
+                  </Card>
+                  
+                  {/* Warning Message */}
+                  <div className="mt-4 p-4 bg-amber-50 dark:bg-amber-950/20 border-2 border-amber-200 dark:border-amber-800 rounded-lg">
+                    <div className="flex items-start gap-3">
+                      <AlertCircle className="w-5 h-5 text-amber-600 dark:text-amber-500 flex-shrink-0 mt-0.5" />
+                      <div>
+                        <h4 className="font-semibold text-amber-900 dark:text-amber-100 mb-1">
+                          Important: Save Your Links!
+                        </h4>
+                        <p className="text-sm text-amber-800 dark:text-amber-200">
+                          Your links are stored in the database, but if you refresh this page, the links shown above will disappear from view. 
+                          Make sure to <strong>copy and save</strong> both your short URL and analytics link somewhere safe before leaving this page!
+                        </p>
+                      </div>
                     </div>
-                    <div className="flex items-center justify-between gap-3 mb-3">
-                      <span className="text-lg font-semibold text-primary truncate">{shortUrl}</span>
-                      <Button variant="outline" size="sm" onClick={handleCopy}>
-                        Copy
-                      </Button>
-                    </div>
-                    <Button variant="secondary" size="sm" className="w-full" onClick={handleViewStats}>
-                      <BarChart3 className="w-4 h-4 mr-2" />
-                      View Analytics
-                    </Button>
-                  </CardContent>
-                </Card>
+                  </div>
+                </>
               )}
             </CardContent>
           </Card>

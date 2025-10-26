@@ -4,7 +4,7 @@ import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card';
 import { useParams, useRouter } from 'next/navigation';
 import React, { useEffect, useState } from 'react'
 import { toast } from 'sonner';
-import { ArrowLeft, Copy, ExternalLink, TrendingUp, BarChart3, Clock } from 'lucide-react';
+import { ArrowLeft, Copy, ExternalLink, TrendingUp, BarChart3, Clock, Share2 } from 'lucide-react';
 import Link from 'next/link';
 
 // Recharts imports
@@ -88,6 +88,12 @@ const Page = () => {
     toast.success("Copied to clipboard!");
   };
 
+  const handleCopyAnalyticsLink = () => {
+    const analyticsUrl = typeof window !== 'undefined' ? window.location.href : '';
+    navigator.clipboard.writeText(analyticsUrl);
+    toast.success("Analytics page link copied!");
+  };
+
   if (loading) {
     return (
       <div className="flex justify-center items-center min-h-screen">
@@ -130,8 +136,16 @@ const Page = () => {
             <ArrowLeft className="w-4 h-4 mr-2" />
             Back to Home
           </Link>
-          <h1 className="text-3xl sm:text-4xl font-bold mb-2">Link Analytics</h1>
-          <p className="text-muted-foreground">Detailed insights for your shortened URL</p>
+          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+            <div>
+              <h1 className="text-3xl sm:text-4xl font-bold mb-2">Link Analytics</h1>
+              <p className="text-muted-foreground">Detailed insights for your shortened URL</p>
+            </div>
+            <Button variant="outline" onClick={handleCopyAnalyticsLink} className="w-full sm:w-auto">
+              <Share2 className="w-4 h-4 mr-2" />
+              Share Analytics Page
+            </Button>
+          </div>
         </div>
 
         {/* Overview Cards */}
